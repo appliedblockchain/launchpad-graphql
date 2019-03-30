@@ -125,16 +125,14 @@ const LikeButton = ({ postId }) => {
   return (
     <Mutation mutation={MUTATIONS.posts.like({ postId })} >
       {(likePost, { data }) => (
-        <div>
-          <button
-            className="likeBtn"
-            onClick={e => {
-              likePost()
-            }}
-          >
-            <span role="img" aria-label="thumbsup">👍</span>
-          </button>
-        </div>
+        <button
+          className="likeBtn"
+          onClick={e => {
+            likePost()
+          }}
+        >
+          <span role="img" aria-label="thumbsup">👍</span>
+        </button>
       )}
     </Mutation>
   )
