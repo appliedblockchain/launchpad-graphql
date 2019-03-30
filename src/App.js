@@ -7,18 +7,15 @@ import './App.css'
 // queries/posts.js
 
 const postsAll = gql`
-{
-  posts {
-    id
-    title
-    description
-    likes
-    comments {
-      text
+  {
+    posts {
       id
+      title
+      description
+      likes
+      comments { text id }
     }
   }
-}
 `
 // queries/index.js
 
@@ -30,23 +27,41 @@ const QUERIES = {
 
 // mutations/index.js
 
-//   mutation($id: ID!) {
-  //   update_posts(input: { postId: $id }, _inc: {likes: 1})
-  // }
-const likePost = gql`
-
-  mutation {
-    update_posts(where: {id: {_eq: 1}}, _inc: {likes: 1}) {
-      affected_rows
+const likePost = (postId) => {
+  return gql`
+    mutation {
+      update_posts(where: {id: {_eq: ${postId}}}, _inc: {likes: 1}) {
+        affected_rows
+      }
     }
-  }
-`
+  `
+}
 
 // mutations/index.js
 
 const MUTATIONS = {
   posts: {
     like: likePost,
+  }
+}
+
+const postsAll = gql`
+  mutation {
+    update_posts(where: {id: {_eq: ${postId}}}, _inc: {likes: 1}) {
+      affected_rows
+    }
+  }
+`
+
+updatePostSub
+subscription {
+  posts {
+    likes
+  }
+}
+const SUBSCRIPTIONS = {
+  posts: {
+    update: updatePostSub,
   }
 }
 
@@ -66,11 +81,11 @@ const App = () => (
 )
 
 const LikeButton = ({ postId }) => {
-  const input = { id: "${postId}" }
+  // const input = { id: "${postId[0]}" }
   // variables={ input}
   // <Mutation mutation={MUTATIONS.posts.like} >
   return (
-    <Mutation mutation={MUTATIONS.posts.like} >
+    <Mutation mutation={MUTATIONS.posts.like(postId.postId)} >
       {(likePost, { data }) => (
         <div>
           <button
