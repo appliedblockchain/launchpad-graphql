@@ -4,7 +4,9 @@ import { Query, Mutation } from 'react-apollo'
 
 import './App.css'
 
-const GET_POSTS = gql`
+// queries/posts.js
+
+const postsAll = gql`
 {
   posts {
     id
@@ -18,17 +20,38 @@ const GET_POSTS = gql`
   }
 }
 `
+// queries/index.js
 
-const LIKE_POST = gql`
+const QUERIES = {
+  posts: {
+    all: postsAll,
+  },
+}
 
-  mutation($id: ID!) {
-    update_posts(input: { starrableId: $id }, _inc: {likes: 1})
+// mutations/index.js
+
+//   mutation($id: ID!) {
+  //   update_posts(input: { postId: $id }, _inc: {likes: 1})
+  // }
+const likePost = gql`
+
+  mutation {
+    update_posts(where: {id: {_eq: 1}}, _inc: {likes: 1}) {
+      affected_rows
+    }
   }
+`
 
-`;
+// mutations/index.js
+
+const MUTATIONS = {
+  posts: {
+    like: likePost,
+  }
+}
 
 const App = () => (
-  <Query query={GET_POSTS}>
+  <Query query={QUERIES.posts.all}>
     {({ data: { posts }, loading }) => {
       if (loading || !posts) {
         return (<div>Loading ...</div>)
@@ -42,13 +65,35 @@ const App = () => (
   </Query>
 )
 
+const LikeButton = ({ postId }) => {
+  const input = { id: "${postId}" }
+  // variables={ input}
+  // <Mutation mutation={MUTATIONS.posts.like} >
+  return (
+    <Mutation mutation={MUTATIONS.posts.like} >
+      {(likePost, { data }) => (
+        <div>
+          <button
+            className="likeBtn"
+            onClick={e => {
+              likePost()
+            }}
+          >
+            <span role="img" aria-label="thumbsup">👍</span>
+          </button>
+        </div>
+      )}
+    </Mutation>
+  )
+}
+
 const PostList = ({ posts }) => (
   <div className="posts">
     {posts && posts.map((post) => (
       <div key={post.id} className="post">
         {post.title}
         <CommentsList comments={post.comments} />
-        <a className="likeBtn">👍</a>
+        <LikeButton postId={{ postId: post.id }} />
         <span className="likes">({post.likes})</span>
       </div>
     ))}
