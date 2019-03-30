@@ -12,3 +12,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+body {
+  margin: 50px 5%;
+}
+
+.post {
+  padding: 10px;
+  background: #EEE;
+  margin-bottom: 40px;
+}
+
+.likeBtn {
+  font-size: 30px;
+  position: relative;
+  top: 6px;
+}
+
+.likes {
+  padding-left: 8px;
+}
