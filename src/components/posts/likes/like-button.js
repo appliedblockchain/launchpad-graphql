@@ -1,6 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import mutations from '../api/mutations'
+import mutations from '../../../api/mutations'
 
 const LikeButton = ({ postId }) => {
   return (

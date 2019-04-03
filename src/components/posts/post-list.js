@@ -1,7 +1,7 @@
 import React from 'react'
-import CommentsList from './comments-list.js'
-import LikeButton from './like-button.js'
-import LikesCount from './likes-count.js'
+import CommentsList from './comments/comments-list'
+import LikeButton from './likes/like-button'
+import LikesCount from './likes/likes-count'
 
 const PostList = ({ posts }) => (
   <div className="posts">

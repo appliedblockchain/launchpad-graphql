@@ -1,6 +1,6 @@
 import React from 'react'
 import { Subscription } from 'react-apollo'
-import subscriptions from '../api/subscriptions'
+import subscriptions from '../../../api/subscriptions'
 
 const LikesCount = ({ postId }) => {
   return (<Subscription

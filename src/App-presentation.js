@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from './ui/Header.js'
+import Header from './ui/Header'
 import gql from 'graphql-tag'
 import { Query, Mutation, Subscription } from 'react-apollo'
 

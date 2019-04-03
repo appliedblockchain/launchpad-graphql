@@ -1,7 +1,7 @@
 import React from 'react'
-import queries from '../api/queries'
+import queries from '../../api/queries'
 import { Query } from 'react-apollo'
-import PostList from './post-list.js'
+import PostList from './post-list'
 
 const Posts = ({ posts }) => (
   <Query query={queries.posts.all}>

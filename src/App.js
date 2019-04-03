@@ -1,9 +1,6 @@
 import React from 'react'
-import Posts from './components/posts.js'
-import Header from './ui/Header.js'
-import mutations from './api/mutations'
-import subscriptions from './api/subscriptions'
-import { Query, Mutation, Subscription } from 'react-apollo'
+import Header from './ui/Header'
+import Posts from './components/posts/posts'
 
 import './App.css'
 
