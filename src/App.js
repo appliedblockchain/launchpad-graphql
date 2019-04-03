@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from './ui/Header.js'
 import gql from 'graphql-tag'
 import { Query, Mutation, Subscription } from 'react-apollo'
 
@@ -12,7 +13,7 @@ import './App.css'
 
 const postsAll = gql`
   {
-    posts {
+    posts(order_by: {id: asc}) {
       id
       title
       description
@@ -75,30 +76,36 @@ const SUBSCRIPTIONS = {
 // main component (app)
 
 const App = () => (
-  <Query query={QUERIES.posts.all}>
-    {({ data: { posts }, loading }) => {
-      if (loading || !posts) {
-        return (<div>Loading ...</div>)
-      }
-      return (
-        <div>
-          <PostList posts={posts} />
-        </div>
-      )
-    }}
-  </Query>
+  <div>
+    <Header />
+    <Query query={QUERIES.posts.all}>
+      {({ data: { posts }, loading }) => {
+        if (loading || !posts) {
+          return (<div className="loading">Loading ...</div>)
+        }
+        return (
+          <div>
+            <PostList posts={posts} />
+          </div>
+        )
+      }}
+    </Query>
+  </div>
 )
 
 // post list
 
 const PostList = ({ posts }) => (
   <div className="posts">
+    <h2 className="title">GraphSQL Posts</h2>
     {posts && posts.map((post) => (
       <div key={post.id} className="post">
-        {post.title}
+        <h4>{post.title}</h4>
         <CommentsList comments={post.comments} />
-        <LikeButton postId={{ postId: post.id }} />
-        <LikesCount postId={{ postId: post.id }} />
+        <div className="social">
+          <LikeButton postId={{ postId: post.id }} />
+          <LikesCount postId={{ postId: post.id }} />
+        </div>
       </div>
     ))}
   </div>
@@ -151,7 +158,9 @@ const LikesCount = ({ postId }) => {
       const { posts } = data
       const { likes } = posts[0]
       return (
-        <span className="likes">({ likes })</span>
+        <span className="likes">
+          { likes } <span className="mini">thumbs-up</span>
+        </span>
       )
     }}
   </Subscription>)
