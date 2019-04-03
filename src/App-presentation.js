@@ -1,12 +1,76 @@
 import React from 'react'
 import Header from './ui/Header.js'
 import gql from 'graphql-tag'
-import queries from './queries'
-import mutations from './mutations'
-import subscriptions from './subscriptions'
 import { Query, Mutation, Subscription } from 'react-apollo'
 
 import './App.css'
+
+// quote / slide
+
+// << *To avoid doing context state management treat every data component as if it's a whole App* >>
+
+// queries/posts.js
+
+const postsAll = gql`
+  {
+    posts(order_by: {id: asc}) {
+      id
+      title
+      description
+      likes
+      comments { text id }
+    }
+  }
+`
+// queries/index.js
+
+const QUERIES = {
+  posts: {
+    all: postsAll,
+  },
+}
+
+// mutations/index.js
+
+const likePost = ({ postId }) => (
+  gql`
+    mutation {
+      update_posts(where: {id: {_eq: ${postId.postId}}}, _inc: {likes: 1}) {
+        affected_rows
+      }
+    }
+  `
+)
+
+// mutations/index.js
+
+const MUTATIONS = {
+  posts: {
+    like: likePost,
+  }
+}
+
+// subscription/posts/likes.js
+
+const updatePostSub = ({ postId }) => {
+  return gql`
+    subscription {
+      posts(where: {id: {_eq: ${postId.postId}}}) {
+        id
+        likes
+      }
+    }
+  `
+}
+// const updatePost = updatePostSub // TODO: remove updatePostSub
+
+const SUBSCRIPTIONS = {
+  posts: {
+    update: updatePostSub,
+  }
+}
+
+// lib end
 
 
 // main component (app)
@@ -87,7 +151,7 @@ const LikeButton = ({ postId }) => {
 
 const LikesCount = ({ postId }) => {
   return (<Subscription
-    subscription={subscrptions.posts.update({ postId })}
+    subscription={SUBSCRIPTIONS.posts.update({ postId })}
   >
     {({ data }) => {
       if (!data) return ""
