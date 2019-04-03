@@ -14,7 +14,7 @@ import './App.css'
 const App = () => (
   <div>
     <Header />
-    <Query query={QUERIES.posts.all}>
+    <Query query={queries.posts.all}>
       {({ data: { posts }, loading }) => {
         if (loading || !posts) {
           return (<div className="loading">Loading ...</div>)
@@ -66,7 +66,7 @@ const CommentsList = ({ comments }) => (
 
 const LikeButton = ({ postId }) => {
   return (
-    <Mutation mutation={MUTATIONS.posts.like({ postId })} >
+    <Mutation mutation={mutations.posts.updateLikes({ postId })} >
       {(likePost, { data }) => (
         <button
           className="likeBtn"
@@ -87,7 +87,7 @@ const LikeButton = ({ postId }) => {
 
 const LikesCount = ({ postId }) => {
   return (<Subscription
-    subscription={subscrptions.posts.update({ postId })}
+    subscription={subscriptions.posts.update({ postId })}
   >
     {({ data }) => {
       if (!data) return ""
