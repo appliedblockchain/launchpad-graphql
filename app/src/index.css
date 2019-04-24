@@ -19,7 +19,7 @@
 /* base and reset */
 
 body, html {
-  background: #DDD;
+  background: #f1f1f1;
   font-family: sans-serif;
   font-size: 110%;
   margin: 0;
@@ -178,6 +178,7 @@ span.mini {
 
 .posts .title {
   margin: 10px 3% 30px;
+  color: #007bff;
 }
 
 .post {

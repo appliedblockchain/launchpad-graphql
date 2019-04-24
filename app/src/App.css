@@ -23,6 +23,12 @@
   color: #61dafb;
 }
 
+.comment {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 300;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

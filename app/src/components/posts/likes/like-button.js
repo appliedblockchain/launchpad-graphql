@@ -4,11 +4,11 @@ import mutations from '../../../api/mutations'
 
 const LikeButton = ({ postId }) => {
   return (
-    <Mutation mutation={mutations.posts.updateLikes({ postId })} >
+    <Mutation mutation={mutations.posts.updateLikes({ postId })}>
       {(likePost, { data }) => (
         <button
           className="likeBtn"
-          onClick={e => {
+          onClick={_ => {
             likePost()
           }}
         >

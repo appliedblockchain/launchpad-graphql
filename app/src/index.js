@@ -14,13 +14,9 @@ import './index.css'
 import api from './utils/api'
 
 const authLink = setContext((_, { headers }) => {
-  console.log('HEADERS*', headers)
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('token')
-  // const payload = await api.authenticate(token)
-  // console.log('PAYLOAD', payload)
-  // return the headers to the context so httpLink can read them
-  console.log('TOKEN*', token)
+
   return {
     headers: {
       ...headers,
@@ -29,8 +25,11 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-const GRAPHQL_API_ROOT = 'http://34.241.245.254/v1alpha1/graphql'
-const GRAPHQL_API_ROOT_WS = 'ws://34.241.245.254/v1alpha1/graphql'
+// const GRAPHQL_API_ROOT = 'http://134.209.89.56/v1alpha1/graphql'
+// const GRAPHQL_API_ROOT_WS = 'ws://134.209.89.56/v1alpha1/graphql'
+
+const GRAPHQL_API_ROOT = 'http://54.77.246.109:8080/v1alpha1/graphql'
+const GRAPHQL_API_ROOT_WS = 'ws://54.77.246.109:8080/v1alpha1/graphql'
 
 const httpLink = createHttpLink({
   uri: GRAPHQL_API_ROOT,
@@ -38,19 +37,7 @@ const httpLink = createHttpLink({
 
 const wsClient = new SubscriptionClient(GRAPHQL_API_ROOT_WS, {
   reconnect: true,
-  lazy: true,
-  // connectionParams: () => {
-  //   const token = localStorage.getItem('token')
-  //   // const payload = await api.authenticate(token)
-  //   console.log('TOKEN ***', token)
-  //   return {
-  //     headers: {
-  //       'X-Hasura-Role': 'user',
-  //       'X-Hasura-User-Id': 1,
-  //       'Authorization': `Bearer ${token}`
-  //     }
-  //   }
-  // }
+  // lazy: true
 })
 
 const wsLink = new WebSocketLink(wsClient);

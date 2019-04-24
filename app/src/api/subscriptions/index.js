@@ -1,9 +1,9 @@
 import postLikes from './posts/likes'
 
-const subscrptions = {
+const subscriptions = {
   posts: {
     update: postLikes,
   }
 }
 
-export default subscrptions
+export default subscriptions
