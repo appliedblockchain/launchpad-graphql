@@ -13,7 +13,7 @@ const routes = [
     },
     handler: async ctx => {
       const { token } = ctx.request.body
-      const verified = await jwt.verify(token, '5c90a95d02b3ee7ae376166e8e5e9893')
+      const verified = await jwt.verify(token, process.env.JWT_SECRET)
       ctx.ok(verified)
     }
   }

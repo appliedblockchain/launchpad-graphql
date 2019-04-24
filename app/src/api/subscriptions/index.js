@@ -1,8 +1,8 @@
-import postLikes from './posts/likes'
+import update from './posts/likes'
 
 const subscriptions = {
   posts: {
-    update: postLikes,
+    update
   }
 }
 

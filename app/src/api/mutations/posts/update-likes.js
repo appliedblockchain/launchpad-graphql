@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-const updateLikes = ({ postId }) => {
-  console.log('POST ID UPDATE', postId, postId.postId)
-  return (
+const updateLikes = ({ postId }) => (
     gql`
     mutation {
       update_post(where: {id: {_eq: ${postId.postId}}}, _inc: {likes: 1}) {
@@ -10,7 +8,6 @@ const updateLikes = ({ postId }) => {
       }
     }
   `
-  )
-}
+)
 
 export default updateLikes

@@ -5,6 +5,7 @@ const respond = require('koa-respond')
 const middleware = require('./router')
 
 const app = new Koa()
+const port = 8000
 
 app
   .use(compress())
@@ -15,4 +16,4 @@ app
   }))
   .use(middleware)
 
-app.listen(8000, console.log('Server listening on port 8000'))
+app.listen(port, console.log(`Server listening on port ${port}`))

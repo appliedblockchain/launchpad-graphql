@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './ui/Header'
 import Posts from './components/posts/posts'
 import AuthRoute from './containers/auth-route/auth-route'
 import LogIn from './components/log-in/log-in'

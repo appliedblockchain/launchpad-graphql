@@ -33,13 +33,12 @@ const Form = props => {
     e.preventDefault()
     try {
       const token = await api.login(email, password)
-      console.log('LOGIN TOKEN', token)
 
       localStorage.setItem('token', token)
 
       props.history.push('/posts')
     } catch (error) {
-
+      console.error(error)
     }
   }
 
@@ -76,13 +75,10 @@ const Form = props => {
   )
 }
 
-const Login = props => { 
-  console.log('LOGIN PROPS', props)
-  return (
-    <> 
-      <Form {...props} />
-    </>
-  )
-}
+const Login = props => (
+  <> 
+    <Form {...props} />
+  </>
+)
 
 export default withRouter(withStyles(styles)(Login))

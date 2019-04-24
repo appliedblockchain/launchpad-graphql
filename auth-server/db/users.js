@@ -1,12 +1,11 @@
 const pool = require('./connection')
 
-const findOne = async userId => {
+const findOne = async email => {
   try {
-    const res = await pool.query('SELECT * FROM person WHERE id = $1', [ userId ])
-    console.log('RES', res)
+    const res = await pool.query('SELECT * FROM person WHERE email = $1', [ email ])
     return res.rows[0]
   } catch (error) {
-    console.log(error.stack)
+    console.error(error.stack)
   }
 }
 

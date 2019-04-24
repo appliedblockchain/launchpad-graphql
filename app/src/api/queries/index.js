@@ -1,8 +1,8 @@
-import postAll from './posts/all'
+import all from './posts/all'
 
 const queries = {
   posts: {
-    all: postAll,
+    all
   }
 }
 

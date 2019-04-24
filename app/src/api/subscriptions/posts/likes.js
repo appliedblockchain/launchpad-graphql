@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-const postLikes = ({ postId }) => {
-  console.log('POST ID', postId, postId.postId)
-  return (
+const postLikes = ({ postId }) => (
     gql`
     subscription {
       post(where: {id: {_eq: ${postId.postId}}}) {
@@ -10,8 +8,7 @@ const postLikes = ({ postId }) => {
         likes
       }
     }
-  `
-  )
-}
+  ` 
+)
 
 export default postLikes

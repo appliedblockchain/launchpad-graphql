@@ -4,8 +4,7 @@
   "description": "",
   "main": "router.js",
   "scripts": {
-    "start": "source ./.env && nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "source ./.env && nodemon server"
   },
   "author": "",
   "license": "ISC",

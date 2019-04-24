@@ -1,17 +1,24 @@
 import axios from 'axios'
 
+const AUTH_SERVER_HOST = process.env.REACT_APP_AUTH_SERVER_HOST
+const AUTH_SERVER_PORT = process.env.REACT_APP_AUTH_SERVER_PORT
+
 const api = axios.create({
-  baseURL: 'http://54.77.246.109:8000/api',
+  baseURL: `http://${AUTH_SERVER_HOST}:${AUTH_SERVER_PORT}/api`,
   timeout: 1000
 })
 
 export default {
   login: async (email, password) => {
-    const { data: token } = await api.post('/login', {
-      email, password
-    })
-
-    return token
+    try {
+      const { data: token } = await api.post('/login', {
+        email, password
+      })
+  
+      return token
+    } catch (error) {
+      console.error(error)
+    }
   },
   authenticate: async token => {
     try {
@@ -21,7 +28,6 @@ export default {
   
       return data
     } catch (error) {
-      console.log('ERROR', error)
       return false
     }
   }
