@@ -28,9 +28,7 @@ const AuthRoute = props => {
   }
 
   return (
-    <>
-      { verified ? <Route {...props} /> : <Redirect to="/" /> }
-    </>
+    verified ? <Route {...props} /> : <Redirect to="/" />
   )
 }
 

@@ -5,9 +5,6 @@ const router = koaRouter()
 
 router.prefix('/api')
 
-routes.reduce((acc, subrouter) => {
-  router.use(subrouter)
-  return acc.concat(subrouter.routes)
-}, [])
+routes.forEach(subrouter => router.use(subrouter))
 
 module.exports = router.middleware()

@@ -6,23 +6,23 @@ import Header from '../../ui/Header'
 
 const Posts = () => (
   <>
-  <Header />
-  <Query query={queries.posts.all}>
-    {({ data, loading }) => {
-      if (!data) {
-        return null
-      }
+    <Header />
+    <Query query={queries.posts.all}>
+      {({ data, loading }) => {
+        if (!data) {
+          return null
+        }
 
-      if (loading || !data.post) {
-        return (<div className="loading">Loading ...</div>)
-      }
-      return (
-        <div>
-          <PostList posts={data.post} />
-        </div>
-      )
-    }}
-  </Query>
+        if (loading || !data.post) {
+          return (<div className="loading">Loading ...</div>)
+        }
+        return (
+          <div>
+            <PostList posts={data.post} />
+          </div>
+        )
+      }}
+    </Query>
   </>
 )
 

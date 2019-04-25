@@ -6,7 +6,7 @@ networks:
 services:
   postgres:
     image: postgres:10.5
-    restart: always
+    restart: unless-stopped
     ports:
       - 5432:5432
     networks:
@@ -17,7 +17,7 @@ services:
     image: hasura/graphql-engine:v1.0.0-alpha43
     depends_on:
       - "postgres"
-    restart: always
+    restart: unless-stopped
     networks:
       - main-net
     environment:
@@ -31,6 +31,7 @@ services:
       - graphql-engine 
       - serve
   app:
+    restart: unless-stopped
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -41,6 +42,7 @@ services:
     ports:
       - 80:3000
   auth-server:
+    restart: unless-stopped
     build: 
       context: ./auth-server
       dockerfile: Dockerfile
